@@ -6,11 +6,11 @@ import os
 from pprint import pprint
 
 
-pullRequestNumber = os.environ['DRONE_REPO_NAME']
-repoOwner = os.environ['DRONE_REPO_NAME']
-repoName = os.environ['DRONE_REPO_NAME']
-oauthToken = os.environ['OAUTH_TOKEN']
-droneEvent = os.environ['DRONE_BUILD_EVENT']
+pullRequestNumber = os.environ.get('DRONE_REPO_NAME')
+repoOwner = os.environ.get('DRONE_REPO_NAME')
+repoName = os.environ.get('DRONE_REPO_NAME')
+oauthToken = os.environ.get('OAUTH_TOKEN','')
+droneEvent = os.environ.get('DRONE_BUILD_EVENT')
 
 isPrValid = False
 def getData(url):
