@@ -20,31 +20,31 @@ def getData(url):
 
 
 if droneEvent == "push":
-    echo "Push event - no verification check required"
+    echo("Push event - no verification check required")
     sys.exit(0)
 
 commits = getData("https://api.github.com/repos/"+ repoOwner + "/"+ repoName + "/pulls/"+ str(pullRequestNumber) +"/commits")
-print "Checking PGP verification status of PR "+ str(pullRequestNumber)
+print("Checking PGP verification status of PR "+ str(pullRequestNumber))
 if len(commits) == 0:
-    print "No commits found"
+    print("No commits found")
     sys.exit(1)
 
 for commit in commits:
     commitData = getData(commit['url'])
     if commitData.get('commit').get('verification'):
         if commitData.get('commit').get('verification').get('verified') == True:
-            print "Commit "+  commitData.get('sha') +" is valid!"
+            print("Commit "+  commitData.get('sha') +" is valid!")
             isPrValid = True
         else:
-            print "Commit " + commitData.get('sha') + " is NOT valid!"
+            print("Commit " + commitData.get('sha') + " is NOT valid!")
             isPrValid = False
     else:
         isPrValid = False
 
 
 if isPrValid:
-    print "All PGP checks passed"
+    print("All PGP checks passed")
     sys.exit(0)
 else:
-    print "PGP checks did not pass"
+    print("PGP checks did not pass")
     sys.exit(1)
