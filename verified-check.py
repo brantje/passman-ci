@@ -6,7 +6,7 @@ import os
 from pprint import pprint
 
 
-pullRequestNumber = os.environ.get('DRONE_REPO_NAME')
+pullRequestNumber = os.environ.get('DRONE_PULL_REQUEST')
 repoOwner = os.environ.get('DRONE_REPO_NAME')
 repoName = os.environ.get('DRONE_REPO_NAME')
 oauthToken = os.environ.get('OAUTH_TOKEN','')
