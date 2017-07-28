@@ -20,13 +20,13 @@ def getData(url):
     response = requests.get(url, headers=headers)
     return json.loads(response.text)
 
-def checkCommit(commit):
+def checkCommit(commit, sha):
     if commit.get('verification'):
         if commit.get('verification').get('verified') == True:
-            print("Commit "+  commit.get('sha') +" is valid!")
+            print("Commit "+  sha +" is valid!")
             return True
         else:
-            print("Commit " + commit.get('sha') + " is NOT valid!")
+            print("Commit " + sha + " is NOT valid!")
             return False
     return False
 
@@ -34,7 +34,7 @@ def checkCommit(commit):
 if droneEvent == "push":
     commitData = getData("https://api.github.com/repos/"+ repoOwner + "/"+ repoName + "/git/commits/" + os.environ.get('DRONE_COMMIT_SHA'))
     print("Checking last commit: "+ os.environ.get('DRONE_COMMIT_SHA'))
-    result = checkCommit(commitData)
+    result = checkCommit(commitData, os.environ.get('DRONE_COMMIT_SHA'))
     if result:
         print("All PGP checks passed")
         sys.exit(0)
@@ -53,7 +53,7 @@ else:
     for commit in commits:
         commitData = getData(commit['url'])
         if commitData.get('commit').get('verification'):
-            isPrValid = checkCommit(commitData.get('commit'))
+            isPrValid = checkCommit(commitData.get('commit'), commit.get('sha') )
         else:
             isPrValid = False
             break
