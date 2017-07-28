@@ -13,6 +13,7 @@ isPrValid = False
 def getData(url):
     headers = {'content-type': 'application/json', 'Accept': 'application/vnd.github.cryptographer-preview'}
     if oauthToken:
+        print("Found oauth token!")
         headers['Authorization'] = 'token '+ oauthToken
     response = requests.get(url, headers=headers)
     return json.loads(response.text)
