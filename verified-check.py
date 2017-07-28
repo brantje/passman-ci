@@ -20,7 +20,7 @@ def getData(url):
 
 
 if droneEvent == "push":
-    echo("Push event - no verification check required")
+    print("Push event - no verification check required")
     sys.exit(0)
 
 commits = getData("https://api.github.com/repos/"+ repoOwner + "/"+ repoName + "/pulls/"+ str(pullRequestNumber) +"/commits")
