@@ -12,6 +12,8 @@ repoName = os.environ.get('DRONE_REPO_NAME')
 oauthToken = os.environ.get('OAUTH_TOKEN','')
 droneEvent = os.environ.get('DRONE_BUILD_EVENT')
 
+print(os.environ.get('TEST',''))
+
 isPrValid = False
 def getData(url):
     headers = {'content-type': 'application/json', 'Accept': 'application/vnd.github.cryptographer-preview'}
