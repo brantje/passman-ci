@@ -3,9 +3,6 @@ import json
 import sys
 import os
 
-from pprint import pprint
-
-
 pullRequestNumber = os.environ.get('DRONE_PULL_REQUEST')
 repoOwner = os.environ.get('DRONE_REPO_OWNER')
 repoName = os.environ.get('DRONE_REPO_NAME')
