@@ -16,6 +16,7 @@ droneEvent = os.environ.get('DRONE_BUILD_EVENT')
 def getData(url):
     headers = {'content-type': 'application/json', 'Accept': 'application/vnd.github.cryptographer-preview'}
     if oauthToken:
+        print("Got authorization token")
         headers['Authorization'] = 'token '+ oauthToken
     response = requests.get(url, headers=headers)
     return json.loads(response.text)
