@@ -14,7 +14,9 @@ droneEvent = os.environ.get('DRONE_BUILD_EVENT')
 
 isPrValid = False
 def getData(url):
-    headers = {'content-type': 'application/json', 'Accept': 'application/vnd.github.cryptographer-preview', 'Authorization': 'token '+ oauthToken}
+    headers = {'content-type': 'application/json', 'Accept': 'application/vnd.github.cryptographer-preview'}
+    if oauthToken:
+        headers['Authorization'] = 'token '+ oauthToken
     response = requests.get(url, headers=headers)
     return json.loads(response.text)
 
@@ -31,6 +33,7 @@ if len(commits) == 0:
 
 for commit in commits:
     commitData = getData(commit['url'])
+    pprint(commitData)
     if commitData.get('commit').get('verification'):
         if commitData.get('commit').get('verification').get('verified') == True:
             print("Commit "+  commitData.get('sha') +" is valid!")
